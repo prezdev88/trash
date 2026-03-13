@@ -1,0 +1,30 @@
+createdAt: "2021-02-23T14:14:21.269Z"
+updatedAt: "2021-12-07T15:18:37.700Z"
+type: "MARKDOWN_NOTE"
+folder: "2093527d77c6fd599f02"
+title: "dbeaver"
+tags: []
+content: '''
+  # dbeaver
+  
+  ```bash
+  sudo nano /usr/share/dbeaver/dbeaver.ini 
+  ```
+  
+  ```bash
+  -startup
+  plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar
+  --launcher.library
+  plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.0.v20200915-1442
+  -vm 
+  /usr/lib/jvm/java-11-openjdk/bin
+  -vmargs
+  -XX:+IgnoreUnrecognizedVMOptions
+  --add-modules=ALL-SYSTEM
+  -Xms64m
+  -Xmx1024m
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

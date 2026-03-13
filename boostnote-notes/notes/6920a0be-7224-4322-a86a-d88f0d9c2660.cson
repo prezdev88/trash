@@ -1,0 +1,56 @@
+createdAt: "2020-03-23T01:47:34.429Z"
+updatedAt: "2020-03-23T01:57:47.264Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "4.- Editar un presidente"
+tags: []
+content: '''
+  # 4.- Editar un presidente
+  
+  ## president.html
+  
+  Añadir a la tabla:
+  
+  ```html
+  <th>Editar</th>
+  ```
+  
+  ```html
+  <!-- Esto se ve así: /president/edit/2-->
+  <td>
+      <a th:href="@{/president/edit/} + ${president.id}">Editar</a>
+  </td>
+  ```
+  
+  ## PresidentController.java
+  ```java
+  /**
+   *
+   * @param president El id entregado como PathVariable, se almacena
+   *                  automáticamente en el objeto president pasado
+   *                  por parámetro
+   * @param model
+   * @return
+   */
+  @GetMapping("/edit/{id}")
+  public String edit(President president, Model model){
+      // Rescatamos el objeto
+      president = presidentService.readById(president.getId());
+  
+      // Compartimos el objeto
+      model.addAttribute("president", president);
+  
+      // Llamamos a la vista
+      return "modify-president";
+  }
+  ```
+  
+  ## modify-president.html
+  Añadir esto en el formulario.
+  ```html
+  <input type="hidden" name="id" th:field="*{id}"/>
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

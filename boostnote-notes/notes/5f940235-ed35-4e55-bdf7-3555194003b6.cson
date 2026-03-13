@@ -1,0 +1,40 @@
+createdAt: "2020-04-10T20:16:05.646Z"
+updatedAt: "2020-07-20T06:18:17.392Z"
+type: "MARKDOWN_NOTE"
+folder: "4fec5dc9910d5e0e5f67"
+title: "Complementos"
+tags: []
+content: '''
+  # Complementos
+  - Spring Boot Tools
+  - Spring Initializr
+  - Spring Boot Dashboard
+  - vscode-icons
+  - vscode-database
+  - IntelliJ IDEA Keybindings
+  - Darcula IntelliJ Theme
+  - GitLens
+  - Maven for Java
+  - Material Icon Theme
+  - Java Extension Pack
+  - XML
+  
+  
+  ## settings.json
+  ```json
+  {
+      "window.zoomLevel": 0,
+      "terminal.integrated.fontSize": 18,
+      "editor.tabSize": 4,
+      "editor.mouseWheelZoom": true,
+      "workbench.colorTheme": "Darcula Theme from IntelliJ",
+      "workbench.iconTheme": "vscode-icons",
+      "files.autoSave": "afterDelay"
+  }   
+  ```
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

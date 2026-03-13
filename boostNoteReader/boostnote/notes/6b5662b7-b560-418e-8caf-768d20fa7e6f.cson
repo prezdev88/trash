@@ -1,0 +1,115 @@
+createdAt: "2020-03-22T04:16:21.971Z"
+updatedAt: "2020-03-22T04:57:53.949Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "2.- Ejemplo básico con MySQL y capa de Servicio"
+tags: [
+  "spring"
+]
+content: '''
+  # 2.- Ejemplo básico con MySQL y capa de Servicio
+  
+  Se añadirá una capa de abstracción más llamada Servicio. Si llega a existir algún cambio en la implementación del servicio, da igual, ya que el controlador quedará igual. De esta forma se desacopla la implementación del servicio con el controlador.
+  
+  ## PresidentService.java
+  ```java
+  package cl.spring.course.service;
+  
+  import cl.spring.course.domain.President;
+  import java.util.List;
+  
+  public interface PresidentService {
+      void save(President president);
+      
+      List<President> read();
+      
+      void delete(President president);
+      
+      President readById(Integer id);
+  }
+  ```
+  
+  ## PresidentServiceImpl.java
+  
+  Si hay algún error en el método marcado con ```@Transactional```, se hará un rollback en la base de datos. Si no hay errores, se hará un commit. En el caso de los read(), se utiliza ```@Transactional(readOnly = true)```. Además mucho ojo con el import ```import org.springframework.transaction.annotation.Transactional;```
+  
+  ```java
+  package cl.spring.course.service;
+  
+  import cl.spring.course.domain.President;
+  import cl.spring.course.repository.PresidentDao;
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.stereotype.Service;
+  import org.springframework.transaction.annotation.Transactional;
+  
+  import java.util.List;
+  
+  @Service
+  public class PresidentServiceImpl implements PresidentService {
+  
+      @Autowired
+      private PresidentDao presidentDao;
+  
+      @Override
+      @Transactional
+      public void save(President president) {
+          presidentDao.save(president);
+      }
+  
+      @Override
+      @Transactional(readOnly = true)
+      public List<President> read() {
+          return (List<President>) presidentDao.findAll();
+      }
+  
+      @Override
+      @Transactional
+      public void delete(President president) {
+          presidentDao.delete(president);
+      }
+  
+      @Override
+      @Transactional(readOnly = true)
+      public President readById(Integer id) {
+          return presidentDao.findById(id).orElse(null);
+      }
+  }
+  ```
+  
+  ## PresidentController.java
+  ```java
+  package cl.spring.course.controller;
+  
+  import cl.spring.course.domain.President;
+  import cl.spring.course.repository.PresidentDao;
+  import cl.spring.course.service.PresidentService;
+  import lombok.extern.slf4j.Slf4j;
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.stereotype.Controller;
+  import org.springframework.ui.Model;
+  import org.springframework.web.bind.annotation.GetMapping;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  
+  @Controller
+  @Slf4j
+  @RequestMapping("/president")
+  public class PresidentController {
+  
+      @Autowired
+      private PresidentService presidentService;
+  
+      @GetMapping()
+      public String index(Model model){
+          Iterable<President> presidents =  presidentService.read();
+  
+          model.addAttribute("presidents", presidents);
+  
+          return "president";
+      }
+  
+  }
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

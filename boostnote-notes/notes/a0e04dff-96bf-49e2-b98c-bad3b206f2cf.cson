@@ -1,0 +1,114 @@
+createdAt: "2020-03-22T05:19:57.864Z"
+updatedAt: "2022-02-16T13:32:48.146Z"
+type: "MARKDOWN_NOTE"
+folder: "315dde175a853a24823f"
+title: "git token"
+tags: []
+content: '''
+  # git token
+  [REDACTED_GITHUB_PAT]
+  
+  # GIT
+  
+  ```bash
+  git config --global --list
+  ```
+  
+  ```bash
+  # Eliminar name y email
+  git config --global --unset-all user.name
+  git config --global --unset-all user.email
+  
+  # Añadir uno nuevo
+  git config --global --add user.name "pperezp"
+  git config --global --add user.email "patodeath@ggmail.com"
+  ```
+  
+  ### Set github username
+  ```bash
+  git config --global --unset-all user.name
+  git config --global --unset-all user.email
+  
+  git config --global --add user.name "pperezp"
+  git config --global --add user.email "patodeath@gmail.com"
+  ```
+  
+  ### Set awto username
+  ```bash
+  git config --local --unset-all user.name
+  git config --local --unset-all user.email
+  
+  git config --local --add user.name "prez"
+  git config --local --add user.email "pperez@awto.cl"
+  ```
+  
+  ## Crear una rama nueva
+  ```shell
+  git checkout -b nuevafuncionalidad
+  ```
+  
+  ## Cambiarse de rama
+  ```shell
+  git checkout nombreRama
+  ```
+  
+  ## Push a una rama
+  ```shell
+  git push origin nombreDeRama
+  ```
+  
+  ### Eliminar una rama
+  ```bash
+  # Local
+  git branch -D nombreRama
+  
+  # Remoto
+  git push origin --delete nombreRama
+  ```
+  
+  ## Renombrar rama actual
+  ```shell
+  # https://www.hostinger.es/tutoriales/renombrar-rama-git
+  git checkout ramaQueQuieroRenombrar
+  git branch -m nuevoNombre
+  git push origin --delete nombre-anterior
+  git push origin -u nombre-nuevo
+  ```
+  
+  ### Move
+  [How to move a git repository with history \\| Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials/git-move-repository)
+  ```bash
+  git fetch --tags
+  git remote rm origin
+  git remote add origin <url to NEW repo>
+  git push origin --all
+  git push --tags
+  ```
+  
+  ## github
+  ```bash
+  git init
+  git add README.md
+  git commit -m "first commit"
+  git remote add origin https://github.com/pperezp/jprezdevutils.git
+  git push -u origin master
+  ```
+  
+  ## Cherry pick
+  ```shell
+  git cherry-pick commitSha
+  ```
+  
+  ## Eliminar commits
+  ```shell
+  git log
+  git rebase -i {id del commit anterior al que queremos eliminar}
+  # De ahí cambiamos las palabras pick por drop
+  git push --force
+  ```
+  
+  git log --stat --author=pperez@awto.cl 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

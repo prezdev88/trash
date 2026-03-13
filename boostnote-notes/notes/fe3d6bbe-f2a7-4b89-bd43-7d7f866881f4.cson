@@ -1,0 +1,29 @@
+createdAt: "2020-05-22T02:04:02.601Z"
+updatedAt: "2020-05-22T02:31:42.104Z"
+type: "MARKDOWN_NOTE"
+folder: "0c3b8ccf0c030907f170"
+title: "Batocera"
+tags: []
+content: '''
+  # Batocera
+  
+  ## ssh
+  
+  [Please support Batocera，thx！ · Issue #49 · RetroFlag/retroflag-picase · GitHub](https://github.com/RetroFlag/retroflag-picase/issues/49)
+  
+  [access_the_batocera_via_ssh [Batocera.linux - Wiki]](https://wiki.batocera.org/doku.php?id=access_the_batocera_via_ssh)
+  
+  ```
+  ssh-keygen -R {RPi-IP-Address}
+  ssh root@{ip}
+  ```
+  
+  ```ssh
+  wget -O - "https://raw.githubusercontent.com/crcerror/retroflag-picase/master/install_batocera.sh" | bash
+  ```
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

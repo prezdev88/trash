@@ -1,0 +1,26 @@
+createdAt: "2020-07-19T23:38:50.588Z"
+updatedAt: "2020-07-19T23:40:14.452Z"
+type: "MARKDOWN_NOTE"
+folder: "fbb13d0d2dac7cf6d2f6"
+title: ".basrc"
+tags: []
+content: '''
+  # .basrc
+  ```shell
+  neofetch
+  # If not running interactively, don't do anything
+  [[ $- != *i* ]] && return
+  
+  alias ls='ls --color=auto'
+  #PS1='[\\u@\\h \\W]\\ $(git branch 2>/dev/null | grep '^*' | sed s/..//) $ '
+  
+  PS1="\\[\\e[32m\\]\\w \\[\\e[91m\\]\\$(parse_git_branch)\\[\\e[00m\\] $ "
+  
+  parse_git_branch() {
+       git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'
+  }
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

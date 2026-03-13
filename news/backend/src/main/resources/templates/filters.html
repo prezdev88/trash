@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News Timeline - Filtros</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <header class="page-header">
+    <div>
+      <h1>News Timeline</h1>
+      <div class="muted">Titulares con hashtags y fuentes</div>
+    </div>
+    <nav>
+      <a th:href="${basePath}" th:classappend="${activePage} == 'home' ? 'active' : ''">Inicio</a>
+      <a th:href="${basePath + 'filtros'}" th:classappend="${activePage} == 'filters' ? 'active' : ''">Filtros</a>
+    </nav>
+  </header>
+
+  <div class="panel" style="margin-bottom: 20px;">
+    <h3>Filtros</h3>
+    <form class="filters" th:action="${basePath + 'filtros'}" th:object="${filterForm}" method="get">
+      <label>
+        <span>Desde</span>
+        <input type="date" th:field="*{from}">
+      </label>
+      <label>
+        <span>Hasta</span>
+        <input type="date" th:field="*{to}">
+      </label>
+      <label>
+        <span>Texto (headline)</span>
+        <input type="text" placeholder="busca en headline" th:field="*{q}">
+      </label>
+      <label>
+        <span>Hashtags (coma)</span>
+        <input type="text" placeholder="kast,boric" th:field="*{hashtags}">
+      </label>
+      <div class="submit-row">
+        <button type="submit">Aplicar filtros</button>
+      </div>
+    </form>
+  </div>
+
+  <section class="panel timeline-panel">
+    <div class="panel-title">
+      <h3>Resultados</h3>
+      <div class="muted small" th:if="${#lists.isEmpty(entries)}">Sin resultados.</div>
+    </div>
+    <div class="timeline" style="margin-top: 12px;">
+      <article class="timeline-item" th:each="entry : ${entries}">
+        <div class="timeline-marker">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="entry-card">
+          <div class="entry-header">
+            <div>
+              <div class="entry-date" th:text="${#temporals.format(entry.date, 'dd-MMM-yyyy', new java.util.Locale('es','ES'))}"></div>
+              <div class="entry-headline" th:text="${entry.headline}"></div>
+            </div>
+            <div class="entry-actions">
+              <a class="icon-button" th:href="${basePath + 'entries/' + entry.id + '/edit'}" title="Editar" aria-label="Editar">
+                ✎
+              </a>
+              <form th:action="${basePath + 'entries/' + entry.id + '/delete'}" method="post">
+                <button class="icon-button ghost" type="submit" title="Eliminar" aria-label="Eliminar" th:attr="data-headline=${entry.headline}">🗑</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="tag-row">
+            <a class="tag" th:each="tag : ${entry.hashtags}" th:href="${basePath + 'filtros?hashtag=' + #uris.escapeQueryParam(tag)}" th:text="${'#' + tag}"></a>
+          </div>
+
+          <div class="sources" th:if="${entry.sources != null and !#lists.isEmpty(entry.sources)}">
+            Fuentes:
+            <span th:each="s, iter : ${entry.sources}">
+              [<span th:text="${iter.index + 1}"></span>]
+              <a th:href="${s.url}" th:text="${s.name}" target="_blank" rel="noreferrer"></a>
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="pagination" th:if="${totalPages > 1}">
+      <span class="page-link disabled" th:if="${page == 0}">← Anterior</span>
+      <a class="page-link" th:if="${page > 0}" th:href="${filterPageBase + 'page=' + (page - 1)}">← Anterior</a>
+      <span class="page-meta">Página <span th:text="${page + 1}"></span> de <span th:text="${totalPages}"></span></span>
+      <span class="page-link disabled" th:if="${page + 1 >= totalPages}">Siguiente →</span>
+      <a class="page-link" th:if="${page + 1 < totalPages}" th:href="${filterPageBase + 'page=' + (page + 1)}">Siguiente →</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

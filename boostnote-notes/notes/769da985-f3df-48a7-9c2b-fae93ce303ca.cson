@@ -1,0 +1,10 @@
+createdAt: "2020-06-01T16:11:50.440Z"
+updatedAt: "2020-06-01T16:11:52.438Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "@Transactional(noRollbackFor = { TooManyFuelRechargesException.class })"
+tags: []
+content: "@Transactional(noRollbackFor = { TooManyFuelRechargesException.class })"
+linesHighlighted: []
+isStarred: false
+isTrashed: false

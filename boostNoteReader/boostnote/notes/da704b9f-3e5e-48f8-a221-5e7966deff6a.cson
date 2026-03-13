@@ -1,0 +1,16 @@
+createdAt: "2020-03-24T15:21:20.378Z"
+updatedAt: "2020-03-25T14:57:34.449Z"
+type: "MARKDOWN_NOTE"
+folder: "0e31593fed290d9573a9"
+title: "Links interesantes"
+tags: []
+content: '''
+  # Links interesantes
+  - [Phaser - A fast, fun and free open source HTML5 game framework](https://phaser.io/)
+  - [GitHub - ryanmcdermott/clean-code-javascript: Clean Code concepts adapted for JavaScript](https://github.com/ryanmcdermott/clean-code-javascript)
+  - [clipboard.js — Copy to clipboard without Flash](https://clipboardjs.com/)
+  - [Getting Started with React - An Overview and Walkthrough Tutorial – Tania Rascia](https://www.taniarascia.com/getting-started-with-react/)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

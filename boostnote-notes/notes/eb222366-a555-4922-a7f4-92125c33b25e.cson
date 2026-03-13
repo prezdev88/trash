@@ -1,0 +1,48 @@
+createdAt: "2020-05-17T05:13:15.014Z"
+updatedAt: "2020-05-17T16:53:08.869Z"
+type: "MARKDOWN_NOTE"
+folder: "04adcf6afaea189e6967"
+title: "Órden de métodos"
+tags: []
+content: '''
+  # Órden de métodos
+  ```c#
+  void Awake(){
+      Debug.Log("Awake");
+  }
+  
+  private void OnEnable(){
+      Debug.Log("On Enable");
+  }
+  
+  void Start(){
+  
+  }
+  
+  void Update(){
+  
+  }
+  
+  void OnDisable(){
+      Debug.Log("On Disable");
+  }
+  
+  void OnDestroy(){
+      Debug.Log("On Destroy");
+  }
+  ```
+  
+  # Configuración de Input en Unity
+  Edit -> Proyect Settings -> Input Manager
+  
+  # Fonde del escenario
+  1. Añadir objeto Background y como hijo de ese, un 3d -> Quad
+  2. En las propiedades del Quad, cambiamos el shader a Unit/Texture
+  3. Lo agrandamos a la camara
+  4. Importamos el fondo a los assets desde assets store.
+  5. En las propiedades de esas fotos (en assets), le cambiamos la propiedad "Wrap Mode" a Repeat, para que se repita con la propiedad offset
+  6. Arrastramos el sprite al objeto quad 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

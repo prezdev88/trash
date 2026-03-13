@@ -1,0 +1,76 @@
+createdAt: "2020-06-28T17:24:25.944Z"
+updatedAt: "2021-03-10T19:29:45.520Z"
+type: "MARKDOWN_NOTE"
+folder: "fbaa9cbb70ca252646a7"
+title: "Dependencias"
+tags: []
+content: '''
+  ## Dependencias
+  ```xml
+  <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>2.0.9</version>
+      <scope>test</scope>
+  </dependency>
+  
+  <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <scope>test</scope>
+  </dependency>
+  ```
+  
+  ## Plugin Jacoco
+  ```java
+  <plugin>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.1</version>
+      <configuration>
+          <excludes>
+              <exclude>**/constant/*</exclude>
+              <exclude>**/config/**/*</exclude>
+              <exclude>**/PaymentsApplication.java</exclude>
+          </excludes>
+      </configuration>
+      <executions>
+          <execution>
+              <goals>
+                  <goal>prepare-agent</goal>
+              </goals>
+          </execution>
+          <execution>
+              <id>report</id>
+              <phase>package</phase>
+              <goals>
+                  <goal>report</goal>
+              </goals>
+          </execution>
+      </executions>
+  </plugin>
+  ```
+  
+  ## Cabecera
+  ```java
+  @RunWith(MockitoJUnitRunner.Silent.class)
+  ```
+  
+  ## Lanzar una excepción cuando se llame a un método void
+  
+  ```java
+  // serviceMock.method(param); 
+  // Si se quiere lanzar una excepción cuando se le pase param como parámetro
+  // Esto en el método @Before
+  doThrow(new Exception()).when(serviceMock).method(param);
+  ```
+  
+  ## Assert de una excepción
+  ```java
+  // service debe estar como @InjectMock
+  assertThrows(Exception.class, () -> service.method(null));
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

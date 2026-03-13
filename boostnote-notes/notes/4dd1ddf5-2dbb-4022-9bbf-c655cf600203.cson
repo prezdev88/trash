@@ -1,0 +1,127 @@
+createdAt: "2020-07-25T05:49:32.372Z"
+updatedAt: "2020-07-26T05:16:51.598Z"
+type: "MARKDOWN_NOTE"
+folder: "44622d40704acb1fe90d"
+title: "Documentación oficial"
+tags: []
+content: '''
+  # Documentación oficial
+  
+  ## Links
+  - [Maven – Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+  
+  - [Maven – Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/index.html)
+  
+  - [Maven – Introduction to the POM](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
+  
+  ```bash
+  # Crear proyecto de prueba maven
+  mvn archetype:generate 
+    -DgroupId=com.mycompany.app 
+    -DartifactId=my-app 
+    -DarchetypeArtifactId=maven-archetype-quickstart 
+    -DarchetypeVersion=1.4 
+    -DinteractiveMode=false
+    
+  cd my-app
+  
+  # Empaquetar el proyecto
+  mvn package
+  
+  # Ejecutar el proyecto
+  java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+  ```
+  
+  ## Ciclo de vida de maven
+  
+  Cada una de estas fases ejecuta todas las anteriores. Por ejemplo, Package ejecuta validate, compile, test y package.
+  
+  Fase | Definición
+  -|-
+  validate | Validar que el proyecto es correcto y toda la información necesaria está disponible
+  compile | Compila el código fuente del proyecto
+  test | Prueba el código fuente compilado usando un marco de prueba de unidad adecuado. Estas pruebas no deberían requerir que el código se empaquete o implemente
+  package | Toma el código compilado y lo empaqueta en un formato distribuible, como un JAR.
+  integration-test | Procesa e implementa el paquete si es necesario en un entorno donde se puedan ejecutar pruebas de integración
+  verify | Ejecuta cualquier verificación para verificar que el paquete sea válido y cumpla con los criterios de calidad
+  install | Instala el paquete en el repositorio local, para usarlo como dependencia en otros proyectos localmente
+  deploy | Hecho en un entorno de integración o lanzamiento, copia el paquete final en el repositorio remoto para compartirlo con otros desarrolladores y proyectos.
+  
+  
+  ## Otro ciclo de vida
+  
+  Fase | Definición
+  -|-
+  clean | Limpia los artefactos creados por compilaciones anteriores 
+  site | Genera documentación del sitio para este proyecto
+  
+  
+  # Maven - Getting started guide
+  
+  ## Arquetipo
+  Un arquetipo es una plantilla de un proyecto que se combina con algunas aportaciones del usuario para producir un proyecto de Maven que se haya adaptado a los requisitos del usuario
+  
+  ## pom.xml
+  Project Object Model
+  
+  ### pom mínimo
+  Tag | Explicación
+  -|-
+  project | tag raiz
+  modelVersion | debe ser 4.0.0
+  groupId | la identificación del grupo del proyecto
+  artifactId | la identificación del artefacto (proyecto)
+  version | la versión del artefacto bajo el grupo especificado
+  
+  #### Ejemplo 
+  ```xml
+  <proyect>
+      <modelVersion>4.0.0</modelVersion>
+      <groupId>com.mycompany.app</groupId>
+      <artifactId>my-app</artifactId>
+      <version>1</version>
+  </proyect>
+  ```
+  
+  ### pom heredado
+  Supongamos que tenemos un proyecto ```my-app``` y tiene un módulo hijo ```module```. El pom de ```module``` puede heredar el pom de ```my-app```
+  
+  ```xml
+  <proyect>
+      <modelVersion> 4.0.0 </modelVersion>
+  
+      <parent>
+          <groupId>com.mycompany.app</groupId>
+          <artifactId>my-app</artifactId>
+          <version>1</version>
+      </parent>
+  
+      <groupId>com.mycompany.app</groupId>
+      <artifactId>module</artifactId>
+      <version>1</version>
+  </project>
+  ```
+  
+  #### Esto permite que el módulo herede el groupId y/o la versión de su POM principal.
+  
+  ```xml
+  <proyect>
+      <modelVersion> 4.0.0 </modelVersion>
+  
+      <parent>
+          <groupId>com.mycompany.app</groupId>
+          <artifactId>my-app</artifactId>
+          <version>1</version>
+      </parent>
+  
+      <groupId>com.mycompany.app</groupId>
+      <artifactId>module</artifactId>
+      <version>1</version>
+  </project>
+  ```
+  
+  aquí voy : https://maven.apache.org/guides/getting-started/index.html#what-is-a-snapshot-version
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,36 @@
+createdAt: "2020-03-23T02:03:25.707Z"
+updatedAt: "2020-03-23T02:05:11.308Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "5.- Eliminar a un presidente"
+tags: []
+content: '''
+  # 5.- Eliminar a un presidente
+  
+  ## president.html
+  
+  Añadir a la tabla:
+  
+  ```html
+  <th>Eliminar</th>
+  ```
+  
+  ```html
+  <td>
+      <a th:href="@{/president/delete/} + ${president.id}">Eliminar</a>
+  </td>
+  ```
+  
+  ## PresidentController.java
+  ```java
+  @GetMapping("/delete/{id}")
+  public String delete(President president){
+      presidentService.delete(president);
+  
+      return "redirect:/president";
+  }
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

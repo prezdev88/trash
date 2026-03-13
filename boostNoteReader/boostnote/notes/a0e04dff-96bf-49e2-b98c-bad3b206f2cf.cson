@@ -1,0 +1,44 @@
+createdAt: "2020-03-22T05:19:57.864Z"
+updatedAt: "2020-03-22T05:23:23.773Z"
+type: "MARKDOWN_NOTE"
+folder: "315dde175a853a24823f"
+title: "GIT"
+tags: []
+content: '''
+  # GIT
+  
+  ```bash
+  git config --global --list
+  ```
+  
+  ```bash
+  # Eliminar name y email
+  git config --global --unset-all user.name
+  git config --global --unset-all user.email
+  
+  # Añadir uno nuevo
+  git config --global --add user.name "pperezp"
+  git config --global --add user.email "patodeath@ggmail.com"
+  ```
+  
+  ### Set github username
+  ```bash
+  git config --global --unset-all user.name
+  git config --global --unset-all user.email
+  
+  git config --global --add user.name "pperezp"
+  git config --global --add user.email "patodeath@gmail.com"
+  ```
+  
+  ### Set awto username
+  ```bash
+  git config --global --unset-all user.name
+  git config --global --unset-all user.email
+  
+  git config --global --add user.name "prez"
+  git config --global --add user.email "pperez@awto.cl"
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

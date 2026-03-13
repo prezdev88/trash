@@ -1,0 +1,23 @@
+createdAt: "2020-10-25T03:29:17.322Z"
+updatedAt: "2020-10-27T01:27:43.778Z"
+type: "MARKDOWN_NOTE"
+folder: "c44ec23854262138791a"
+title: "Reset root password"
+tags: []
+content: '''
+  # Reset root password
+  ```
+  sudo service mysql stop
+  sudo mkdir /var/run/mysqld
+  sudo chown mysql: /var/run/mysqld
+  sudo mysqld_safe --skip-grant-tables --skip-networking &
+  mysql -uroot mysql
+  UPDATE mysql.user SET authentication_string=PASSWORD('123123'), plugin='mysql_native_password' WHERE User='root' AND Host='localhost';
+  FLUSH PRIVILEGES;
+  sudo pkill mysqld
+  sudo service mysql start
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

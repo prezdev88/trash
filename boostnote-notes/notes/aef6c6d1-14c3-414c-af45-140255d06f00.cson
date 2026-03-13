@@ -1,0 +1,16 @@
+createdAt: "2020-06-12T14:33:30.676Z"
+updatedAt: "2020-06-12T14:33:53.435Z"
+type: "MARKDOWN_NOTE"
+folder: "c44ec23854262138791a"
+title: "UTC"
+tags: []
+content: '''
+  # UTC
+  ```
+  SELECT @@global.time_zone;
+  SET @@global.time_zone = "+00:00";
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,107 @@
+createdAt: "2020-03-22T04:34:44.165Z"
+updatedAt: "2020-03-22T05:10:28.771Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "3.- Agregar un presidente"
+tags: [
+  "spring"
+]
+content: '''
+  # 3.- Agregar un presidente
+  
+  ## president.html
+  Añadir esté fragmento de código:
+  ```html
+  <!--
+  th:href="@{/president/create}":
+      Hace referencia al controlador/método. Por ende
+      en el controlador PresidentController, debe existir
+      un método @GetMapping /create que cargue una vista.
+  -->
+  <a th:href="@{/president/create}">Agregar presidente</a>
+  ```
+  
+  ## modify-president.html
+  
+  La vista ```modify-president.html``` se utilizará para modificar como para crear un presidente.
+  ```html
+  <!DOCTYPE html>
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+      <head>
+          <meta charset="UTF-8">
+          <title>Preisentes</title>
+      </head>
+      <body>
+          <h1>Agregar Presidente</h1>
+  
+          <a th:href="@{/president}">Volver</a>
+  
+          <!--
+          th:action="@{/president/save}"  :
+              controlador/método, por ende debe
+              haber un método @PostMapping /save
+              en el controlador.
+  
+          th:object="${president}:
+              Este objeto es el que se va a utilizar para enviar
+              los datos al controlador para que se pueda crear un
+              presidente en la base de datos. Este objeto se declara
+              en el controlador PresidentController, específicamente
+              en el método @GetMapping /create. Se declara como parámetro
+              de ese método.
+  
+          th:field="*{name}":
+          th:field="*{year}":
+              De esta manera uno los atributos de la clase java, con
+              el formulario. De esa forma los datos ingresados en el
+              formulario quedan automáticamente en el objeto java que
+              se le pasará a @PostMapping /save.
+          -->
+          <form th:action="@{/president/save}" method="post" th:object="${president}">
+              <label for="name">Nombre: </label>
+              <input type="text" name="name" th:field="*{name}"/>
+  
+              <label for="year">Año: </label>
+              <input type="number" name="year" th:field="*{year}"/>
+  
+              <input type="submit" value="Almacenar"/>
+          </form>
+      </body>
+  </html>
+  ```
+  
+  ## PresidentController.java
+  
+  ```java
+  /**
+       * Método que carga la vista modify-president.html
+       * al llamar a la url /president/create
+       *
+       * @param president Éste es el objeto que queda unido al formulario
+       * @return El nombre de la vista
+       */
+      @GetMapping("/create")
+      public String create(President president){
+          return "modify-president";
+      }
+  
+      /**
+       * Método que se llama desde el formulario.
+       * @param president Recibe como parámetro el presidente con
+       *                  todos los datos del formulario
+       * @return la redirección hacia la vista donde carga a todos
+       * los presidentes desde la base de datos
+       */
+      @PostMapping("/save")
+      public String save(President president){
+          presidentService.save(president);
+  
+          return "redirect:/president";
+      }
+  ```
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

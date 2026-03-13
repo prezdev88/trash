@@ -1,0 +1,29 @@
+createdAt: "2020-03-23T02:21:17.439Z"
+updatedAt: "2020-03-23T02:23:45.708Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "7.- i18n"
+tags: []
+content: '''
+  # 7.- i18n
+  
+  ## resources/messages.properties
+  
+  ```properties
+  president.header.title = Presidentes
+  president.footer = Desarrollado por empresa X
+  ```
+  
+  ## Primera forma    
+  ```html
+  <h1 th:text="#{president.header.title}"/>
+  ```
+  
+  ## Segunda forma
+  ```html
+  <span>[[#{president.footer}]] - 2020</span>
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,20 @@
+{
+    "folders": [
+        {
+            "key": "4641d9edd7f71dc1dfb4",
+            "color": "#FF8E00",
+            "name": "Spring Boot"
+        },
+        {
+            "key": "0e31593fed290d9573a9",
+            "color": "#E10051",
+            "name": "Notas"
+        },
+        {
+            "key": "315dde175a853a24823f",
+            "color": "#B013A4",
+            "name": "git"
+        }
+    ],
+    "version": "1.0"
+}

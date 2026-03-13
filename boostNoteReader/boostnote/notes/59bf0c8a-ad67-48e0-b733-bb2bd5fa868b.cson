@@ -1,0 +1,34 @@
+createdAt: "2020-03-23T02:11:59.406Z"
+updatedAt: "2020-03-23T02:14:59.178Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "6.- Templates thymeleaf"
+tags: []
+content: '''
+  # 6.- Templates thymeleaf
+  
+  ## resources/templates/layout/template.html
+  
+  ```html
+  <!DOCTYPE html>
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+      <header th:fragment="header">
+          <h1>Presidentes</h1>
+      </header>
+  
+      <footer th:fragment="footer">
+          <span>Desarrollado por empresa X 2020</span>
+      </footer>
+  </html>
+  ```
+  
+  ## ¿Cómo incluir estas plantillas?
+  
+  ```html
+  <header th:replace="layout/template :: header"/>
+  <header th:replace="layout/template :: footer"/>
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

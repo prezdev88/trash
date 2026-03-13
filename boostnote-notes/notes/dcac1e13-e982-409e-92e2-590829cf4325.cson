@@ -1,0 +1,72 @@
+createdAt: "2020-07-26T07:17:14.532Z"
+updatedAt: "2021-01-17T02:53:46.788Z"
+type: "MARKDOWN_NOTE"
+folder: "fbb13d0d2dac7cf6d2f6"
+title: "Bash"
+tags: []
+content: '''
+  # Bash
+  
+  ## Colores en terminal
+  [bash - How to change the output color of echo in Linux - Stack Overflow](https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux)
+  
+  ## Script para compilar y ejecutar gowgo
+  
+  Script hecho para compilar y ejecutar gowgo en wildfly. Este script compila gowgo completo, lo copia a wildfly, inicia ms-datatables, inicia wildfly y listo!.
+  ```bash
+  # compile-and-run.sh gowgo out of ide
+  
+  # https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
+  YELLOW=`tput setaf 3`
+  BOLD=`tput bold`
+  
+  AWTO_ROOT_PATH=/home/prez/awto
+  AWTO_PROJECT_PATH=$AWTO_ROOT_PATH/awto-gowgo-migration-project
+  AWTO_EAR_TARGET_PATH=$AWTO_PROJECT_PATH/AWTOEar/target
+  WILDFLY_PATH=$AWTO_ROOT_PATH/wildfly-20.0.0.Final
+  WILDFLY_DEPLOYMENTS_PATH=$WILDFLY_PATH/standalone/deployments
+  WILDFLY_EXECUTABLE_PATH=$WILDFLY_PATH/bin/standalone.sh
+  DATATABLES_TARGET_PATH=$AWTO_ROOT_PATH/microservices/ms-datatables/target
+  DATATABLES_EXECUTABLE=datatables-1.0-SNAPSHOT.jar
+  
+  echo "${BOLD} ${YELLOW} Empaquetando..."
+  sleep 0.4
+  cd $AWTO_PROJECT_PATH
+  mvn package -DskipTests
+  echo "${BOLD} ${YELLOW} Empaquetado!"
+  sleep 0.4
+  echo "${BOLD} ${YELLOW} Limpiando antiguos archivos .ear de wildfly..."
+  sleep 0.4
+  rm $WILDFLY_DEPLOYMENTS_PATH/awtoMavenEar.*
+  echo "${BOLD} ${YELLOW} Limpiado!"
+  sleep 0.4
+  echo "${BOLD} ${YELLOW} Copiando awtoMavenEar.ear a wildfly deployments.."
+  sleep 0.4
+  cp $AWTO_EAR_TARGET_PATH/awtoMavenEar.ear $WILDFLY_DEPLOYMENTS_PATH
+  echo "${BOLD} ${YELLOW} Copiado!"
+  sleep 0.4
+  echo "${BOLD} ${YELLOW} Ejecutado datatables en segundo plano"
+  sleep 0.4
+  cd $DATATABLES_TARGET_PATH
+  java -jar $DATATABLES_EXECUTABLE &
+  DATATABLES_PID=`pgrep -f 'datatables'`
+  echo "${BOLD} ${YELLOW} PID: $DATATABLES_PID"
+  sleep 0.4
+  echo "${BOLD} ${YELLOW} Arrancando servidor wildfly..."
+  sleep 0.4
+  sh $WILDFLY_EXECUTABLE_PATH
+  echo "${BOLD} ${YELLOW} Matando a datatables..."
+  sleep 0.4
+  pgrep -f 'datatables' | xargs kill -9
+  echo "${BOLD} ${YELLOW} Muerto!"
+  sleep 0.4
+  echo "${BOLD} ${YELLOW} Verifcando que este muerto..."
+  sleep 0.4
+  DATATABLES_PID=`pgrep -f 'datatables'`
+  echo "DATATABLES_PID: $DATATABLES_PID"
+  echo "${BOLD} ${YELLOW} Listo!"
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

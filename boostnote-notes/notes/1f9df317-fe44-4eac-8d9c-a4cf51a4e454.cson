@@ -1,0 +1,23 @@
+createdAt: "2020-11-15T23:29:33.452Z"
+updatedAt: "2020-11-15T23:29:49.144Z"
+type: "MARKDOWN_NOTE"
+folder: "fbb13d0d2dac7cf6d2f6"
+title: "v4l2loopback"
+tags: []
+content: '''
+  # v4l2loopback
+  ```
+  yay -S linux-headers
+  yay -S v4l2loopback-dkms 
+  yay -S obs-v4l2sink
+  
+  $ git clone https://github.com/umlaeute/v4l2loopback
+  $ cd v4l2loopback
+  $ make && sudo make install
+  $ sudo depmod -a
+  $ sudo modprobe v4l2loopback
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

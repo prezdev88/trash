@@ -1,0 +1,29 @@
+createdAt: "2020-05-18T20:36:46.085Z"
+updatedAt: "2020-05-20T00:52:31.094Z"
+type: "MARKDOWN_NOTE"
+folder: "0c3b8ccf0c030907f170"
+title: "Backup and Restore micro sd"
+tags: []
+content: '''
+  # Backup and Restore micro sd
+  [How to backup the Raspberry Pi SD Card using Linux – Kamil's Lab](http://kamilslab.com/2017/02/15/how-to-backup-the-raspberry-pi-sd-card-using-linux/)
+  ```shell
+  # Ver el nombre del device (micro sd)
+  df -h
+  
+  # Supongamos que la micro sd a respaldar es /dev/sdb
+  # Backup
+  sudo dd if=/dev/sdb of=RaspberryPiBackup.img
+  
+  # Supongamos que la micro sd "nueva" es /dev/sdc
+  # Restore
+  sudo dd bs=4M if=RaspberryPiBackup.img of=/dev/sdc
+  ```
+  
+  sudo dd if=/dev/sdd of=raspberry-all-roms-200519.img
+  
+  sudo dd bs=4M if=RaspberryPiBackup.img of=/dev/sdc
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

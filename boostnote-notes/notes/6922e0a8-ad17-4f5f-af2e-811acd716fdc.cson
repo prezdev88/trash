@@ -1,0 +1,445 @@
+createdAt: "2020-04-12T21:04:29.428Z"
+updatedAt: "2020-04-12T21:21:10.602Z"
+type: "MARKDOWN_NOTE"
+folder: "b03307558dfbe9194b8d"
+title: "Hibernate"
+tags: []
+content: '''
+  # Hibernate
+  
+  [GitHub - pperezp/test-hibernate-maven: Project with maven and hibernate](https://github.com/pperezp/test-hibernate-maven.git)
+  
+  ## 1.- Creación de proyecto maven
+  ```shell
+  mvn -B archetype:generate \\
+    -DarchetypeGroupId=org.apache.maven.archetypes \\
+    -DgroupId=cl.prez.hibernate \\
+    -DartifactId=test-hibernate-mvn
+  ```
+  
+  ### pom.xml
+  ```xml
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <groupId>cl.prez.hibernate</groupId>
+      <artifactId>testHibernateMvn</artifactId>
+      <packaging>jar</packaging>
+      <version>1.0-SNAPSHOT</version>
+      <name>testHibernateMvn</name>
+      <url>http://maven.apache.org</url>
+      
+      <dependencies>
+          <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+          <dependency>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.12</version>
+              <scope>provided</scope>
+          </dependency>
+  
+          <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+          <dependency>
+              <groupId>org.hibernate</groupId>
+              <artifactId>hibernate-core</artifactId>
+              <version>5.4.14.Final</version>
+          </dependency>
+  
+          <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+          <dependency>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <version>5.1.48</version>
+          </dependency>
+      </dependencies>
+  
+      <!-- Build JAR with dependencies-->
+      <build>
+          <plugins>
+              <plugin>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <configuration>
+                  <archive>
+                      <manifest>
+                          <mainClass>cl.prez.hibernate.App</mainClass>
+                      </manifest>
+                  </archive>
+                  <descriptorRefs>
+                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                  </descriptorRefs>
+              </configuration>
+              </plugin>
+          </plugins>
+      </build>
+  
+      <!-- JDK 1.8 -->
+      <properties>
+          <maven.compiler.target>1.8</maven.compiler.target>
+          <maven.compiler.source>1.8</maven.compiler.source>
+      </properties>
+  </project>
+  
+  ```
+  
+  ## 2.- Base de datos
+  ```mysql
+  CREATE DATABASE IF NOT EXISTS test;
+  
+  USE test;
+  
+  CREATE TABLE style(
+      style_id INTEGER AUTO_INCREMENT,
+      style_name VARCHAR(100),
+      PRIMARY KEY(style_id)
+  );
+  
+  INSERT INTO 
+      style(style_name) 
+  VALUES
+      ('Heavy metal'),
+      ('Trash metal'),
+      ('Speed metal'),
+      ('Death metal'),
+      ('Brutal death metal'),
+      ('Metal extremo'),
+      ('Djent'),
+      ('Groove metal'),
+      ('Death metal técnico'),
+      ('Death metal progresivo'),
+      ('Death metal melódico'),
+      ('Power metal');
+  
+  CREATE TABLE country(
+      country_id INTEGER AUTO_INCREMENT,
+      country_name VARCHAR(100),
+      PRIMARY KEY(country_id)
+  );
+  
+  INSERT INTO 
+      country(country_name) 
+  VALUES
+      ('Estados Unidos'),
+      ('Suecia'),
+      ('Chile'),
+      ('Finlandia');
+  
+  CREATE TABLE band(
+      band_id INTEGER AUTO_INCREMENT,
+      band_name VARCHAR(100),
+      country_id INTEGER,
+      band_year INTEGER,
+      PRIMARY KEY(band_id),
+      FOREIGN KEY(country_id) REFERENCES country(country_id)
+  );
+  
+  INSERT INTO 
+      band(band_name, country_id, band_year) 
+  VALUES
+      ('Metallica', 1, 1981),
+      ('Cannibal Corpse', 1, 1988),
+      ('Deicide', 1, 1987),
+      ('Meshuggah', 2, 1987),
+      ('Criminal', 3, 1991),
+      ('Death', 1, 1983),
+      ('Children of bodom', 4, 1997);
+  
+  CREATE TABLE band_style(
+      band_id INTEGER,
+      style_id INTEGER,
+      FOREIGN KEY(band_id) REFERENCES band(band_id),
+      FOREIGN KEY(style_id) REFERENCES style(style_id)
+  );
+  
+  INSERT INTO
+      band_style(band_id, style_id)
+  VALUES
+      (1,1), (1,2), (1,3),
+      (2,4), (2,5),
+      (3,4),
+      (4,6), (4,7),
+      (5,2), (5,4), (5,8),
+      (6,4), (6,9), (6,10),
+      (7,11), (7,12);
+  
+  
+  SELECT * FROM style;
+  SELECT * FROM country;
+  SELECT * FROM band;
+  SELECT * FROM band_style;
+  
+  -- 1.- Listado de bandas y su información
+  SELECT 
+      band.band_id 'Band ID',
+      band.band_name 'Band',
+      GROUP_CONCAT(style.style_name) 'Styles',
+      country.country_name 'Country',
+      band.band_year 'Year'
+  FROM   
+      band 
+      LEFT JOIN country ON country.country_id = band.country_id
+      LEFT JOIN band_style ON band_style.band_id = band.band_id
+      LEFT JOIN style ON style.style_id = band_style.style_id
+  GROUP BY
+      band.band_id
+  ORDER BY 
+  	band_name;
+  ```
+  
+  ## 3.- resources/META-INF/persistence.xml
+  ```xml
+  <?xml version="1.0" encoding="UTF-8" ?>
+  <persistence 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+      version="2.0" 
+      xmlns="http://java.sun.com/xml/ns/persistence">
+  
+      <persistence-unit name="persistence-unit">
+          <properties>
+              <property name="javax.persistence.jdbc.driver"      value="com.mysql.jdbc.Driver" />
+              <property name="javax.persistence.jdbc.url"         value="jdbc:mysql://localhost:3306/test" />
+              <property name="javax.persistence.jdbc.user"        value="root" />
+              <property name="javax.persistence.jdbc.password"    value="123456" />
+              <property name="hibernate.dialect"                  value="org.hibernate.dialect.MySQLDialect" />
+              <property name="hibernate.show_sql"                 value="false" />
+          </properties>
+      </persistence-unit>
+  </persistence>
+  ```
+  
+  ## 4.- Clases modelo (Entities)
+  
+  ### model/Style.java
+  ```java
+  package cl.prez.hibernate.model;
+  
+  import javax.persistence.Column;
+  import javax.persistence.Entity;
+  import javax.persistence.GeneratedValue;
+  import javax.persistence.GenerationType;
+  import javax.persistence.Id;
+  import javax.persistence.Table;
+  
+  import lombok.Data;
+  
+  @Data
+  @Entity
+  @Table(name = "style")
+  public class Style {
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      @Column(name = "style_id")
+      private Integer id;
+  
+      @Column(name = "style_name")
+      private String name;
+  }
+  ```
+  
+  ### model/Country.java
+  ```java
+  package cl.prez.hibernate.model;
+  
+  import javax.persistence.Column;
+  import javax.persistence.Entity;
+  import javax.persistence.GeneratedValue;
+  import javax.persistence.GenerationType;
+  import javax.persistence.Id;
+  import javax.persistence.Table;
+  
+  import lombok.Data;
+  
+  @Data
+  @Entity
+  @Table(name = "country")
+  public class Country {
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      @Column(name = "country_id")
+      private Integer id;
+  
+      @Column(name = "country_name")
+      private String name;
+  }
+  ```
+  
+  ### model/dto/BandDTO.java
+  Esta clase es para ejecutar el select "Listado de bandas y su información"
+  ```java
+  package cl.prez.hibernate.model.dto;
+  
+  import lombok.AllArgsConstructor;
+  import lombok.Data;
+  
+  @Data
+  @AllArgsConstructor
+  public class BandDTO {
+      private Integer id;
+      private String name;
+      private String styles;
+      private String country;
+      private Integer year;
+  }
+  ```
+  
+  ### model/Band.java
+  ```java
+  package cl.prez.hibernate.model;
+  
+  import java.util.List;
+  
+  import javax.persistence.Column;
+  import javax.persistence.Entity;
+  import javax.persistence.GeneratedValue;
+  import javax.persistence.GenerationType;
+  import javax.persistence.Id;
+  import javax.persistence.JoinColumn;
+  import javax.persistence.JoinTable;
+  import javax.persistence.ManyToMany;
+  import javax.persistence.ManyToOne;
+  import javax.persistence.NamedNativeQuery;
+  import javax.persistence.NamedNativeQueries;
+  import javax.persistence.Table;
+  import javax.persistence.SqlResultSetMapping;
+  import javax.persistence.ConstructorResult;
+  import javax.persistence.ColumnResult;
+  
+  import cl.prez.hibernate.model.dto.BandDTO;
+  
+  import lombok.Data;
+  
+  @NamedNativeQueries({
+      @NamedNativeQuery(
+          name = "getInfoBands",
+          query = "SELECT"+ 
+                  "    band.band_id 'band_id',"+ 
+                  "    band.band_name 'band_name',"+ 
+                  "    GROUP_CONCAT(style.style_name) 'band_styles',"+ 
+                  "    country.country_name 'band_country',"+ 
+                  "    band.band_year 'band_year' "+ 
+                  "FROM"+ 
+                  "    band"+ 
+                  "    LEFT JOIN country ON country.country_id = band.country_id"+ 
+                  "    LEFT JOIN band_style ON band_style.band_id = band.band_id"+ 
+                  "    LEFT JOIN style ON style.style_id = band_style.style_id "+ 
+                  "GROUP BY"+ 
+                  "    band.band_id "+ 
+                  "ORDER BY"+  
+                  "    band_name",
+          resultSetMapping = "getInfoBandsMapping"
+      )    
+  })
+  
+  @SqlResultSetMapping(
+      name = "getInfoBandsMapping",
+      classes = @ConstructorResult(
+          targetClass = BandDTO.class,
+          columns = {
+              @ColumnResult(name = "band_id"),
+              @ColumnResult(name = "band_name"),
+              @ColumnResult(name = "band_styles"),
+              @ColumnResult(name = "band_country"),
+              @ColumnResult(name = "band_year")
+          }
+      )
+  )
+  
+  @Data
+  @Entity
+  @Table(name = "band")
+  public class Band {
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      @Column(name = "band_id")
+      private Integer id;
+  
+      @Column(name = "band_name")
+      private String name;
+  
+      @ManyToOne
+      @JoinColumn(name = "country_id")
+      private Country country;
+  
+      @ManyToMany
+      @JoinTable(
+          name = "band_style",
+          joinColumns = @JoinColumn(name = "band_id"),
+          inverseJoinColumns = @JoinColumn(name = "style_id")
+      )
+      private List<Style> styles;
+  
+      @Column(name = "band_year")
+      private Integer year;
+  }
+  ```
+  ## 5.- Clase principal
+  ### App.java
+  ```java
+  package cl.prez.hibernate;
+  
+  import java.util.List;
+  
+  import javax.persistence.EntityManager;
+  import javax.persistence.EntityManagerFactory;
+  import javax.persistence.Persistence;
+  import javax.persistence.Query;
+  
+  import cl.prez.hibernate.model.Band;
+  import cl.prez.hibernate.model.dto.BandDTO;
+  
+  public class App {
+      public static void main( String[] args ){
+          // Name in persistence.xml
+          final String PERSISTENCE_NAME = "persistence-unit";
+  
+          EntityManagerFactory entityManagerFactory   = Persistence.createEntityManagerFactory(PERSISTENCE_NAME);
+          EntityManager entityManager                 = entityManagerFactory.createEntityManager();
+  
+          Query query = entityManager.createQuery("FROM Band", Band.class);
+          List<Band> bands = query.getResultList();
+  
+          System.out.println("Bands 1");
+          for(Band band : bands){
+              System.out.println(band);
+          }
+          
+          query = entityManager.createNamedQuery("getInfoBands");
+          List<BandDTO> bandDTOs = query.getResultList();
+  
+          System.out.println("Bands 2");
+          for(BandDTO band : bandDTOs){
+              System.out.println(band);
+          }
+      }
+  }
+  ```
+  ## 6.- Ejecutar la aplicación
+  ### run.sh
+  ```shell
+  mvn clean compile assembly:single
+  java -jar target/testHibernateMvn-1.0-SNAPSHOT-jar-with-dependencies.jar
+  ```
+  
+  ### Salida
+  ```shell
+  Bands 1
+  Band(id=1, name=Metallica, country=Country(id=1, name=Estados Unidos), styles=[Style(id=1, name=Heavy metal), Style(id=2, name=Trash metal), Style(id=3, name=Speed metal)], year=1981)
+  Band(id=2, name=Cannibal Corpse, country=Country(id=1, name=Estados Unidos), styles=[Style(id=4, name=Death metal), Style(id=5, name=Brutal death metal)], year=1988)
+  Band(id=3, name=Deicide, country=Country(id=1, name=Estados Unidos), styles=[Style(id=4, name=Death metal)], year=1987)
+  Band(id=4, name=Meshuggah, country=Country(id=2, name=Suecia), styles=[Style(id=6, name=Metal extremo), Style(id=7, name=Djent)], year=1987)
+  Band(id=5, name=Criminal, country=Country(id=3, name=Chile), styles=[Style(id=2, name=Trash metal), Style(id=4, name=Death metal), Style(id=8, name=Groove metal)], year=1991)
+  Band(id=6, name=Death, country=Country(id=1, name=Estados Unidos), styles=[Style(id=4, name=Death metal), Style(id=9, name=Death metal técnico), Style(id=10, name=Death metal progresivo)], year=1983)
+  Band(id=7, name=Children of bodom, country=Country(id=4, name=Finlandia), styles=[Style(id=11, name=Death metal melódico), Style(id=12, name=Power metal)], year=1997)
+  Bands 2
+  BandDTO(id=2, name=Cannibal Corpse, styles=Death metal,Brutal death metal, country=Estados Unidos, year=1988)
+  BandDTO(id=7, name=Children of bodom, styles=Death metal melódico,Power metal, country=Finlandia, year=1997)
+  BandDTO(id=5, name=Criminal, styles=Trash metal,Death metal,Groove metal, country=Chile, year=1991)
+  BandDTO(id=6, name=Death, styles=Death metal,Death metal técnico,Death metal progresivo, country=Estados Unidos, year=1983)
+  BandDTO(id=3, name=Deicide, styles=Death metal, country=Estados Unidos, year=1987)
+  BandDTO(id=4, name=Meshuggah, styles=Metal extremo,Djent, country=Suecia, year=1987)
+  BandDTO(id=1, name=Metallica, styles=Heavy metal,Trash metal,Speed metal, country=Estados Unidos, year=1981)
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

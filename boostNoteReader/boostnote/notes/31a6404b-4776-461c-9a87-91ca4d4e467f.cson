@@ -1,0 +1,99 @@
+createdAt: "2020-03-22T03:06:51.978Z"
+updatedAt: "2020-03-22T04:57:56.819Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "0.- Spring boot"
+tags: [
+  "spring"
+]
+content: '''
+  # 0.- Spring boot
+  
+  ## Links
+  - https://start.spring.io/
+  
+  
+  ## ¿Qué dependencias escoger?
+  - Spring Boot DevTools
+  - Lombok
+  - Thymeleaf
+  - Spring Web
+  - Spring Data JPA
+  - MySQL Driver
+  
+  
+  ## pom.xml (Dependencias)
+  ```xml
+  <dependencies>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+      
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      </dependency>
+      
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+  
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-devtools</artifactId>
+          <scope>runtime</scope>
+          <optional>true</optional>
+      </dependency>
+      
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <scope>runtime</scope>
+      </dependency>
+      
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <optional>true</optional>
+      </dependency>
+      
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+          <scope>test</scope>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.junit.vintage</groupId>
+                  <artifactId>junit-vintage-engine</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+  </dependencies>
+  ```
+  
+  ## application.properties
+  ```properties
+  spring.main.banner-mode=off
+  spring.thymeleaf.cache=false
+  
+  # MySQL Connection
+  spring.datasource.url=jdbc:mysql://localhost/testSpringBoot?useSSL=false&serverTimezone=UTC
+  spring.datasource.username=root
+  spring.datasource.password=123456
+  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+  
+  # Show SQL Querys
+  spring.jpa.properties.hibernate.format_sql=true
+  
+  # Show SQL statement
+  logging.level.org.hibernate.SQL=debug
+  
+  # Show SQL values
+  logging.level.org.hibernate.type.descriptor.sql=trace
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,20 @@
+createdAt: "2020-06-24T02:53:47.350Z"
+updatedAt: "2020-06-24T03:05:09.765Z"
+type: "MARKDOWN_NOTE"
+folder: "b08d34eff61408f92f4a"
+title: "WebSocket"
+tags: []
+content: '''
+  # WebSocket
+  
+  ```shell
+  npm init -y
+  npm install --save express
+  npm install --save socket.io
+  ```
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

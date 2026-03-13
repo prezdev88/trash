@@ -1,0 +1,42 @@
+createdAt: "2020-06-19T17:21:24.061Z"
+updatedAt: "2020-06-19T17:26:14.281Z"
+type: "MARKDOWN_NOTE"
+folder: "0e31593fed290d9573a9"
+title: "Cosas importantes"
+tags: []
+content: '''
+  # Cosas importantes
+  - hacer esto
+  - hacer esto otro
+  
+  Nombre|apellido
+  -|-
+  Julia|Muñoz
+  
+  
+  # Ejemplo de MySql
+  
+  ```mysql
+  SELECT * FROM aw_fin_electronic_tax_document; // aw_invoice
+  SELECT * FROM aw_fin_reason_purchase_order_failed;
+  SELECT * FROM aw_fin_etd_detail;
+  SELECT * FROM aw_fin_etd_detail_description;
+  SELECT * FROM aw_fin_purchase_order_status;
+  ```
+  
+  # Ejemplo de servicio en spring
+  ```java
+  AwtoCreditInfo awtoCreditInfo = new AwtoCreditInfo();
+  PostpaidTransactionInfo postpaidTransactionInfo = new PostpaidTransactionInfo();
+  Profile profile = (Profile) request.getSession().getAttribute("profile");
+  if (!profile.isLoggedIn()) {
+      awtoCreditInfo.setSuccess(false);
+      String lMessage = resourceBundleHelperComponent.getMessage("error.user.not.loggedin");
+      awtoCreditInfo.setErrorMessage(lMessage);
+      return awtoCreditInfo;
+  }
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: true

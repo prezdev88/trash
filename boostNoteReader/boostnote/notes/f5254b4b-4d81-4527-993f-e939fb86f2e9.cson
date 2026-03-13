@@ -1,0 +1,131 @@
+createdAt: "2020-03-22T03:56:39.574Z"
+updatedAt: "2020-03-22T04:57:59.861Z"
+type: "MARKDOWN_NOTE"
+folder: "4641d9edd7f71dc1dfb4"
+title: "1.- Ejemplo básico con MySQL"
+tags: [
+  "spring"
+]
+content: '''
+  # 1.- Ejemplo básico con MySQL
+  
+  ## script.sql
+  ```mysql
+  CREATE DATABASE testSpringBoot;
+  
+  USE testSpringBoot;
+  
+  CREATE TABLE president (
+      id INT AUTO_INCREMENT,
+      name VARCHAR(100),
+      year INT,
+      PRIMARY KEY (id)
+  );
+  
+  INSERT INTO president(name, year) VALUES
+  ('Manuel Blanco Encalada', 1826),
+  ('Agustín Eyzaguirre', 1826),
+  ('Francisco Antonio Pinto Díaz', 1827);
+  
+  SELECT * FROM president;
+  ```
+  
+  ## President.java
+  ```java
+  package cl.spring.course.domain;
+  
+  import lombok.Data;
+  
+  import javax.persistence.*;
+  import java.io.Serializable;
+  
+  @Data
+  @Entity
+  @Table(name = "president")
+  public class President implements Serializable {
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      private Integer id;
+      private String name;
+      private Integer year;
+  }
+  ```
+  
+  ## PresidentDao.java
+  ```java
+  package cl.spring.course.repository;
+  
+  import cl.spring.course.domain.President;
+  import org.springframework.data.repository.CrudRepository;
+  
+  public interface PresidentDao extends CrudRepository<President, Integer> {
+  }
+  ```
+  
+  ## PresidentController.java
+  ```java
+  package cl.spring.course.controller;
+  
+  import cl.spring.course.domain.President;
+  import cl.spring.course.repository.PresidentDao;
+  import lombok.extern.slf4j.Slf4j;
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.stereotype.Controller;
+  import org.springframework.ui.Model;
+  import org.springframework.web.bind.annotation.GetMapping;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  
+  @Controller
+  @Slf4j
+  @RequestMapping("/president")
+  public class PresidentController {
+  
+      @Autowired
+      private PresidentDao presidentDao;
+  
+      @GetMapping()
+      public String index(Model model){
+          Iterable<President> presidents =  presidentDao.findAll();
+  
+          model.addAttribute("presidents", presidents);
+  
+          return "president";
+      }
+  
+  }
+  ```
+  
+  ## president.html
+  ```html
+  <!DOCTYPE html>
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+      <head>
+          <meta charset="UTF-8">
+          <title>Title</title>
+      </head>
+      <body>
+          <h1>Presidentes</h1>
+  
+          <table border="1">
+              <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Año</th>
+              </tr>
+  
+              <tr th:each="president : ${presidents}">
+                  <td th:text="${president.id}"></td>
+                  <td th:text="${president.name}"></td>
+                  <td th:text="${president.year}"></td>
+              </tr>
+          </table>
+      </body>
+  </html>
+  ```
+  
+  ## Resultado (http://localhost:8080/president)
+  ![Imgur](https://i.imgur.com/9sTMgRo.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

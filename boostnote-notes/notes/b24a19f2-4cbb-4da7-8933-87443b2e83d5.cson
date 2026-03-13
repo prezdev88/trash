@@ -1,0 +1,56 @@
+createdAt: "2020-10-28T03:11:08.826Z"
+updatedAt: "2021-11-29T19:41:07.721Z"
+type: "MARKDOWN_NOTE"
+folder: "8e36d7e5391d430efd8d"
+title: "Docker"
+tags: []
+content: '''
+  # Docker
+  ```bash
+  systemctl start docker.service
+  docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+  mysql -h 127.0.0.1 -P 32768 -u root -p
+  ```
+  
+  # SSH a qa
+  ```bash
+  ssh prez@ramses.awto.pro
+  password: mi password mitica [peaterre]
+  ```
+  
+  # Listado de todos los container de prez
+  ```bash
+  docker ps -a | grep prez
+  ```
+  
+  # Entrar a un container
+  ```bash
+  docker exec -it {container_id} /bin/sh
+  ```
+  
+  # Atach to output log (live)
+  ```bash
+  docker attach {container_id}
+  ```
+  
+  
+  # Scripts
+  
+  ```bash
+  # connect
+  id=$(docker ps -aqf "name=$1")
+  docker exec -it $id /bin/sh
+  
+  # listcontainers
+  docker ps -a | grep $1
+  
+  # attach
+  id=$(docker ps -aqf "name=$1")
+  docker attach $id
+  ```
+  
+  tail -f jboss/wildfly/standalone/log/server.log
+'''
+linesHighlighted: []
+isStarred: true
+isTrashed: false

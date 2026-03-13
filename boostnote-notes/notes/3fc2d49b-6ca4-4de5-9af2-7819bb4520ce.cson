@@ -1,0 +1,267 @@
+createdAt: "2020-11-30T14:09:37.498Z"
+updatedAt: "2020-12-01T03:57:03.838Z"
+type: "MARKDOWN_NOTE"
+folder: "07a2e5b9be3e3493ea6b"
+title: "JSP"
+tags: []
+content: '''
+  # JSP
+  ```jsp
+  <%@ include file="/jsp/includes/taglibs.jsp" %>
+  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+  <form:form
+      method="post"
+      id="formUpload"
+      action="${contextPath}/generic/file/upload?${_csrf.parameterName}=${_csrf.token}&vehicleId=${vehicleId}"
+      enctype="multipart/form-data"
+  >
+      <!--
+          Paste this on each page that you want to implement. This is a zone-detail example:
+  
+          <script>
+              const ENTITY = "ZONE";
+              const ENTITY_ID = ${zoneInfo.zoneId};
+              const VIEW_NAME = "/zone-detail?zoneId=${zoneInfo.zoneId}";
+          </script>
+      -->
+  
+      <input type="hidden" id="entity" name="entity"/>
+      <input type="hidden" id="entityId" name="entityId"/>
+      <input type="hidden" id="viewName" name="viewName"/>
+      
+      <div class="uploader clearfix">
+          <div class="uploader-title">
+              <spring:message code="uploader.title" />
+          </div>
+  
+          <div class="upload-section">
+              <div class="upload-file">
+                  <div>
+                      <p class="upload-title hidden-xs">
+                          <spring:message code="uploader.drag.title" />
+                      </p>
+  
+                      <p class="upload-sub-title hidden-xs">
+                          <spring:message code="uploader.drag.subtitle" />
+                      </p>
+  
+                      <div class="action-btns">
+                          <a href="javascript:" class="btn btn-secondary upload-files-btn">
+                              <spring:message code="uploader.button.select.files" />
+                          </a>
+  
+                          <input type="file" class="hide" id="uploadFilesButton" name="uploadFiles[]" multiple>
+                      </div>
+                  </div>
+              </div>
+  
+              <div>
+                  <input type="submit" id="uploadButton" value="<spring:message code="uploader.button.upload" />">
+              </div>
+  
+              <div class="clearfix"></div>
+  
+              <div class="files"></div>
+          </div>
+      </div>
+  </form:form>
+  ```
+  
+  # Javascript
+  
+  ```javascript
+  $('#entity').val(ENTITY);
+  $('#entityId').val(ENTITY_ID);
+  $('#viewName').val(VIEW_NAME);
+  
+  $('#uploadButton').click(function(){
+      showLoadAnimation();
+      $('#formUpload').submit();
+  });
+  
+  $('.upload-files-btn').click(function(){
+      $("#uploadFilesButton").click();
+  });
+  
+  $('.upload-file').on('dragover', function(event) {
+      notLoadImageInPage(event);
+  });
+  
+  $('.upload-file').on('dragenter', function(event) {
+      notLoadImageInPage(event);
+  });
+  
+  $('.upload-file').on('drop', function(event) {
+      notLoadImageInPage(event);
+  
+      let files = event.originalEvent.dataTransfer.files;
+      handleFileSelect(event, files);
+  });
+  
+  $(".upload-file #uploadFilesButton").change(function(event){
+      let files = event.target.files;
+      handleFileSelect(event, files);
+  });
+  
+  $(document).on("click", ".btn-remove-file", function () {
+      $(this).closest(".data-view").remove();
+  });
+  
+  function notLoadImageInPage(event) {
+      event.preventDefault();
+      event.stopPropagation();
+  }
+  
+  function handleFileSelect(event, files){
+      showLoadAnimation();
+  
+      let fileCurrentIndex = 0;
+  
+      for(let file of files){
+          fileCurrentIndex++;
+          let fileReader = new FileReader();
+  
+          fileReader.onload = function(event){
+              let deleteFileDiv = generateDeleteFileDiv(event, file);
+              $(".files").append(deleteFileDiv);
+  
+              if(isLoadAllFiles(fileCurrentIndex, files)){
+                  hideLoadAnimation();
+              }
+          }
+  
+          fileReader.readAsDataURL(file);
+      }
+  }
+  
+  function generateDeleteFileDiv(event, file){
+      return '<div class="row data-view">'+
+                  '<input type="hidden" name="fileData" value="' + event.target.result + '">'+
+                  '<div class="col-md-6 file-name">'+ file.name + '</div>'+
+                  '<input type="hidden" name="fileName" value="'+ file.name +'">' +
+  
+                  '<div class="col-md-6">'+
+                      '<i class="fa fa-times"></i>' +
+                      '<a href="javascript:;" class="btn-remove-file">Eliminar archivo</a>'+
+                  '</div>'+
+              '</div>';
+  }
+  
+  function isLoadAllFiles(fileCurrentIndex, files) {
+      return fileCurrentIndex === files.length;
+  }
+  
+  ```
+  
+  # Java
+  ```java
+  package com.awto.web.controller.generic.file;
+  
+  import com.awto.generic.files.Entity;
+  import com.awto.generic.files.UploadFile;
+  import com.awto.generic.files.UploadFileRequest;
+  import com.awto.generic.files.UploadFileResponse;
+  import com.awto.service.generic.files.FileService;
+  import com.awto.web.beans.Profile;
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.stereotype.Controller;
+  import org.springframework.ui.Model;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  import org.springframework.web.bind.annotation.RequestMethod;
+  
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpSession;
+  import java.util.ArrayList;
+  import java.util.Base64;
+  import java.util.List;
+  
+  @Controller
+  @RequestMapping(value = "/generic/file")
+  /*
+  @MultipartConfig(
+      fileSizeThreshold = 1024 * 1024 * 10,   // 10 MB
+      maxFileSize = 1024 * 1024 * 50,         // 50 MB
+      maxRequestSize = 1024 * 1024 * 100      // 100 MB
+  )*/
+  public class FileController {
+  
+      @Autowired
+      private FileService fileService;
+  
+      @RequestMapping(value = "/upload", method = RequestMethod.POST)
+      public String upload(HttpServletRequest request, Model model){
+          String viewName = request.getParameter("viewName");
+          UploadFileRequest uploadFileRequest = toUploadFileRequest(request);
+          UploadFileResponse uploadFileResponse = fileService.upload(uploadFileRequest);
+          model.addAttribute("uploadFileResponse", uploadFileResponse);
+  
+          return "redirect:" + viewName;
+      }
+  
+      private UploadFileRequest toUploadFileRequest(HttpServletRequest httpServletRequest) {
+          UploadFileRequest uploadFileRequest = new UploadFileRequest();
+  
+          int userId = getUserId(httpServletRequest);
+          Entity entity = getEntity(httpServletRequest);
+          Integer entityId = getEntityId(httpServletRequest);
+          List<UploadFile> files = getUploadFiles(httpServletRequest);
+  
+          uploadFileRequest.setEntity(entity);
+          uploadFileRequest.setUserId(userId);
+          uploadFileRequest.setEntityId(entityId);
+          uploadFileRequest.setFiles(files);
+  
+          return uploadFileRequest;
+      }
+  
+      private int getUserId(HttpServletRequest httpServletRequest) {
+          HttpSession httpSession = httpServletRequest.getSession();
+          Profile profile = (Profile) httpSession.getAttribute("profile");
+          return profile.getId();
+      }
+  
+      private Entity getEntity(HttpServletRequest httpServletRequest) {
+          String entityString = httpServletRequest.getParameter("entity");
+          return Entity.valueOf(entityString);
+      }
+  
+      private Integer getEntityId(HttpServletRequest httpServletRequest) {
+          return Integer.parseInt(httpServletRequest.getParameter("entityId"));
+      }
+  
+      private List<UploadFile> getUploadFiles(HttpServletRequest httpServletRequest) {
+          List<UploadFile> uploadFiles = new ArrayList<>();
+  
+          String[] filesData = httpServletRequest.getParameterValues("fileData");
+          String[] fileNames = httpServletRequest.getParameterValues("fileName");
+  
+          int i = 0;
+          for(String fileData : filesData){
+              String fileName = fileNames[i];
+              String contentType = getContentType(fileData);
+              byte[] bytes = getBytes(fileData);
+  
+              uploadFiles.add(new UploadFile(fileName, contentType, bytes));
+  
+              i++;
+          }
+  
+          return uploadFiles;
+      }
+  
+      private byte[] getBytes(String fileData) {
+          String base64Data = fileData.split(",")[1];
+          return Base64.getDecoder().decode(base64Data);
+      }
+  
+      private String getContentType(String fileData) {
+          String data = fileData.split(";")[0];
+          return data.split(":")[1];
+      }
+  }
+  
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

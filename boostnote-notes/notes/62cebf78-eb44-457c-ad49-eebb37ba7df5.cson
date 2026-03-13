@@ -1,0 +1,17 @@
+createdAt: "2020-05-06T22:03:33.570Z"
+updatedAt: "2021-03-16T16:21:19.758Z"
+type: "MARKDOWN_NOTE"
+folder: "0e31593fed290d9573a9"
+title: "VPN"
+tags: []
+content: '''
+  # VPN
+  yay -S networkmanager-fortisslvpn
+  
+  # Escritorio remoto
+  yay -S remmina
+  yay -S remmina-plugin-rdesktop
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

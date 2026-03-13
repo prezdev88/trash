@@ -1,0 +1,16 @@
+createdAt: "2020-03-22T04:57:21.703Z"
+updatedAt: "2020-04-16T21:52:05.004Z"
+type: "MARKDOWN_NOTE"
+folder: "0e31593fed290d9573a9"
+title: "Ayuda markdown"
+tags: []
+content: '''
+  # Ayuda markdown
+  
+  [markdown-cheatsheet-online.pdf](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
+  
+  [Mastering Markdown · GitHub Guides](https://guides.github.com/features/mastering-markdown/)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,35 @@
+createdAt: "2020-03-24T15:21:20.378Z"
+updatedAt: "2021-09-29T18:52:03.669Z"
+type: "MARKDOWN_NOTE"
+folder: "0e31593fed290d9573a9"
+title: "Links interesantes"
+tags: []
+content: '''
+  # Links interesantes
+  - [Phaser - A fast, fun and free open source HTML5 game framework](https://phaser.io/)
+  - [GitHub - ryanmcdermott/clean-code-javascript: Clean Code concepts adapted for JavaScript](https://github.com/ryanmcdermott/clean-code-javascript)
+  - [clipboard.js — Copy to clipboard without Flash](https://clipboardjs.com/)
+  - [Getting Started with React - An Overview and Walkthrough Tutorial – Tania Rascia](https://www.taniarascia.com/getting-started-with-react/)
+  - [How to create a documentation website using VuePress](https://www.freecodecamp.org/news/how-to-create-a-documentation-website-using-vuepress-eeabe8a99045/)
+  - [Flujo de trabajo de Gitflow \\| Atlassian Git Tutorial](https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow)
+  - [HTML DOM - Common tasks of managing HTML DOM with vanilla JavaScript](https://htmldom.dev/)
+  - [](https://api.publicapis.org/entries)
+  - [Image-Charts documentation](https://documentation.image-charts.com/)
+  	## Ejemplo
+  	```bash
+  	https://image-charts.com/chart?
+  		chan=8999%2CeaseInOutBack&
+  		chbr=5&
+  		chco=4ECDC4&
+  		chd=t%3A95%2C30%2C12%2C1&
+  		chl=95%7C30%7C12%7C1&
+  		chs=900x300&
+  		cht=bvg&
+  		chtt=Account%20ledge%20not%20found%20error&
+  		chxl=0%3A%7CMEMBERSHIP%7CTRIP_BY_MINUTE%7CEXTENDED_BOOKING%7CMULTI_DAY_TRIP&
+  		chxt=x%2Cy)
+  	```
+'''
+linesHighlighted: []
+isStarred: true
+isTrashed: false

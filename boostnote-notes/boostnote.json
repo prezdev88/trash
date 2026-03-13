@@ -1,0 +1,110 @@
+{
+  "folders": [
+    {
+      "key": "4641d9edd7f71dc1dfb4",
+      "color": "#FF8E00",
+      "name": "spring-boot"
+    },
+    {
+      "key": "0e31593fed290d9573a9",
+      "color": "#E10051",
+      "name": "notas"
+    },
+    {
+      "key": "315dde175a853a24823f",
+      "color": "#B013A4",
+      "name": "git"
+    },
+    {
+      "key": "44622d40704acb1fe90d",
+      "color": "#FF8E00",
+      "name": "maven"
+    },
+    {
+      "key": "dd6e78996a836dbc03a5",
+      "color": "#2BA5F7",
+      "name": "emojis"
+    },
+    {
+      "key": "4fec5dc9910d5e0e5f67",
+      "color": "#2BA5F7",
+      "name": "visual-studio"
+    },
+    {
+      "key": "b03307558dfbe9194b8d",
+      "color": "#B013A4",
+      "name": "hibernate"
+    },
+    {
+      "key": "04adcf6afaea189e6967",
+      "color": "#E10051",
+      "name": "unity"
+    },
+    {
+      "key": "0c3b8ccf0c030907f170",
+      "color": "#E10051",
+      "name": "raspberry pi"
+    },
+    {
+      "key": "c44ec23854262138791a",
+      "color": "#30D5C8",
+      "name": "mysql"
+    },
+    {
+      "key": "b08d34eff61408f92f4a",
+      "color": "#E10051",
+      "name": "node"
+    },
+    {
+      "key": "fbaa9cbb70ca252646a7",
+      "color": "#FF8E00",
+      "name": "junit"
+    },
+    {
+      "key": "6b03ffbd293d1e69359d",
+      "color": "#30D5C8",
+      "name": "apps"
+    },
+    {
+      "key": "fbb13d0d2dac7cf6d2f6",
+      "color": "#2BA5F7",
+      "name": "linux"
+    },
+    {
+      "key": "8e36d7e5391d430efd8d",
+      "color": "#2BA5F7",
+      "name": "docker"
+    },
+    {
+      "key": "07a2e5b9be3e3493ea6b",
+      "color": "#E10051",
+      "name": "upload-files"
+    },
+    {
+      "key": "2093527d77c6fd599f02",
+      "color": "#3FD941",
+      "name": "dbeaver"
+    },
+    {
+      "key": "e57036f423814e2e7e38",
+      "color": "#FF8E00",
+      "name": "Pega"
+    },
+    {
+      "key": "94d91bc25cc612dfef67",
+      "color": "#E10051",
+      "name": "gcp"
+    },
+    {
+      "key": "880b575673e30b32f7ed",
+      "color": "#30D5C8",
+      "name": "linux"
+    },
+    {
+      "key": "5e53e2306d911bad1dd3",
+      "color": "#30D5C8",
+      "name": "javascript"
+    }
+  ],
+  "version": "1.0"
+}

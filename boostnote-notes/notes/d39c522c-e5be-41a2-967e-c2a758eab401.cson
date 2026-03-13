@@ -1,0 +1,29 @@
+createdAt: "2020-05-18T16:29:32.188Z"
+updatedAt: "2020-05-22T02:08:41.861Z"
+type: "MARKDOWN_NOTE"
+folder: "0c3b8ccf0c030907f170"
+title: "Retropie"
+tags: []
+content: '''
+  # Retropie
+  
+  ## ssh
+  
+  [SSH · RetroPie/RetroPie-Setup Wiki · GitHub](https://github.com/RetroPie/RetroPie-Setup/wiki/SSH)
+  
+  ```
+  ssh-keygen -R {RPi-IP-Address}
+  ssh pi@ip-address
+  password: raspberry
+  ```
+  
+  [GitHub - RetroFlag/retroflag-picase: RetroFlag Pi-Case Safe Shutdown](https://github.com/RetroFlag/retroflag-picase)
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

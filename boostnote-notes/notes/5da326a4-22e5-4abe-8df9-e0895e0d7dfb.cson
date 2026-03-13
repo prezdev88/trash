@@ -1,0 +1,49 @@
+createdAt: "2021-04-06T03:52:59.225Z"
+updatedAt: "2021-04-07T14:20:20.746Z"
+type: "MARKDOWN_NOTE"
+folder: "e57036f423814e2e7e38"
+title: "Pega"
+tags: []
+content: '''
+  # Pega
+  ```
+  Declarativo != Imperativo (jdk8)
+  
+  Patrones creacionales
+  Patrones estructurales
+  Patrones comportamiento
+  
+  Patrones creacionales: encapsular / ocultar el como se crea (trabajo con interfaces)
+      - Abstract Factory
+      - Singleton (limita a 1 la instancia de un objeto)
+      - Builder
+      - Prototype (Crear objetos a partir de una plantilla) clonar un objeto existente
+      
+  Patrones estructurales: Especifica como las clses se comunican entre si
+      - Adapter
+          Permite a dos clasees con interfaces diferentes comunicarse entre ellas mediante un objeto intermedio
+      - Fecade 
+          (Fachada, crear fachada para una libreria externa)
+      
+  Patrones de comportamiento: Gestionan algoritmos
+      - Command
+      - Observer (los objetos se suscriben a otro y actuar se1un eventos)
+  
+      
+      
+      
+  Kafka: Sistema de mensajeria (en tiempo real -> latencia menor o igual a 10ms)
+      - Se depositan mensajes en forma de eventos
+      - Se crean topics
+      
+  Ventajas
+      - Baja latencia
+      - Permite construir aplicaciones quie reaccionen a eventos en tiempo real
+      - Linkedin, netflix, uber
+      
+      
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
